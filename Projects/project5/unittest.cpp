@@ -9,13 +9,23 @@
 #include "Shape.h"
 #include "reading.h"
 #include "Sphere.h"
+#include "Cylinder.h"
+#include "Cone.h"
+#include "Cuboid.h"
 
 using namespace std;
 
 int main() {
-    string name = "Sphere1";
-    Sphere sph(name,1);
-    cout << sph.getInfo() << "\n";
+    string name = "Cube#1";
+    Cuboid cyl(name,2,2,2);
+    vector<string> cond;
+    
+    cond.push_back("type");
+    cond.push_back("<");
+    cond.push_back("cyl");
+
+    cout << cyl.test(cond) << endl;
+    cout << cyl.getInfo() << "\n";
 
     return 0;
 }

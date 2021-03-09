@@ -4,17 +4,17 @@
 
 class Cone: public Shape {
 public:
-    Cone(std::string&, int radius, int height);
+    Cone(const std::string name, double radius, double height);
     ~Cone();
 
-    double getArea();
-    double getVolume();
-    bool test(std::vector<std::string>& cond);
-    std::string getInfo();
+    double getArea() const;
+    double getVolume() const;
+    bool test(const std::vector<std::string>& cond) const;
+    std::string getInfo() const;
 
 private:
-    int radius;
-    int height;
+    double radius;
+    double height;
 };
 
 #endif

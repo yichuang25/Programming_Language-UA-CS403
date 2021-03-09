@@ -18,14 +18,16 @@ double Sphere::getVolume() const{
 
 bool Sphere::test(const vector<string>& cond) const{
     if (cond.empty()) {
+        //printf("2\n");
         return true;
     }
     for(int i=0; i<cond.size(); i=i+3) {
         string name = cond.at(i);
         string op = cond.at(i+1);
         string value = cond.at(i+2);
-
+        //printf("%s\n",cond.at(i).c_str());
         if (name == "type") { //type op value
+            
             string type = "sphere";
             if(op == "==") {
                 if(type != value) {
@@ -132,9 +134,14 @@ bool Sphere::test(const vector<string>& cond) const{
 
 string Sphere::getInfo() const{
     string text;
-    text = "Name: " + this->getName() + " Area: ";
-    string area = to_string(this->getArea());
-    text.append(area);
+    char radius[6];
+    char area[6];
+    char volume[6];
+    
+    sprintf(area,"%.2lf",this->getArea());
+    sprintf(volume,"%.2lf",this->getVolume());
+    sprintf(radius,"%.2lf",this->radius);
+    text = "Sphere: " + this->getName() + ", Radius=" + radius + "\n" + "Surface area: " + area + ", Volume: " + volume;
 
     return text;
 }

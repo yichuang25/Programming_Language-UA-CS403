@@ -4,18 +4,18 @@
 
 class Cuboid: public Shape {
 public:
-    Cuboid(std::string&, int length, int width, int height);
+    Cuboid(const std::string name, double length, double width, double height);
     ~Cuboid();
 
-    double getArea();
-    double getVolume();
-    bool test(std::vector<std::string>& cond);
-    std::string getInfo();
+    double getArea() const;
+    double getVolume() const;
+    bool test(const std::vector<std::string>& cond) const;
+    std::string getInfo() const;
 
 private:  
-    int length;
-    int width;
-    int height;
+    double length;
+    double width;
+    double height;
 };
 
 #endif

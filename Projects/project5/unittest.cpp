@@ -29,7 +29,11 @@ int main() {
     cout << cyl.test(cond) << endl;
     cout << cyl.getInfo() << "\n"; 
     */
-    readFrom("shapes.dat");
+    vector<Shape*> *list = readFrom("shapes.dat");
+
+    for(int i =0; i<list->size();i++) {
+        cout << list->at(i)->getInfo() << endl;
+    }
 
     return 0;
 }

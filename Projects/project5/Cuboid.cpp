@@ -43,22 +43,22 @@ bool Cuboid::test(const vector<string>& cond) const {
                 }
             }
             else if(op == ">=") {
-                if(type < name) {
+                if(type < value) {
                     return false;
                 }
             }
             else if(op == "<=") {
-                if(type > name) {
+                if(type > value) {
                     return false;
                 }
             }
             else if(op == ">") {
-                if(type <= name) {
+                if(type <= value) {
                     return false;
                 }
             }
             else { //<
-                if(type >= name) {
+                if(type >= value) {
                     return false;
                 }
             }
@@ -137,11 +137,11 @@ bool Cuboid::test(const vector<string>& cond) const {
 
 string Cuboid::getInfo() const {
     string text;
-    char length[6];
-    char width[6];
-    char height[6];
-    char area[6];
-    char volume[6];
+    char length[100];
+    char width[100];
+    char height[100];
+    char area[100];
+    char volume[100];
 
     sprintf(length,"%.2lf",this->length);
     sprintf(width,"%.2lf",this->width);
@@ -149,6 +149,6 @@ string Cuboid::getInfo() const {
     sprintf(volume,"%.2lf",this->getVolume());
     sprintf(area,"%.2lf",this->getArea());
 
-    text = "Cone: " + this->getName() + ", Length=" + length +", Width=" + width + ", Height=" + height + "\nSurface area: " + area + ", Volume: " + volume;
+    text = "Cuboid: " + this->getName() + ", Length=" + length +", Width=" + width + ", Height=" + height + "\nSurface area: " + area + ", Volume: " + volume;
     return text;
 }

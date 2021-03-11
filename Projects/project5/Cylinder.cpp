@@ -42,22 +42,22 @@ bool Cylinder::test(const vector<string>& cond) const {
                 }
             }
             else if(op == ">=") {
-                if(type < name) {
+                if(type < value) {
                     return false;
                 }
             }
             else if(op == "<=") {
-                if(type > name) {
+                if(type > value) {
                     return false;
                 }
             }
             else if(op == ">") {
-                if(type <= name) {
+                if(type <= value) {
                     return false;
                 }
             }
             else { //<
-                if(type >= name) {
+                if(type >= value) {
                     return false;
                 }
             }
@@ -136,10 +136,10 @@ bool Cylinder::test(const vector<string>& cond) const {
 
 string Cylinder::getInfo() const {
     string text;
-    char radius[6];
-    char height[6];
-    char area[6];
-    char volume[6];
+    char radius[100];
+    char height[100];
+    char area[100];
+    char volume[100];
 
     sprintf(radius,"%.2lf",this->radius);
     sprintf(height,"%.2lf",this->height);

@@ -77,7 +77,7 @@ vector<Shape*> *readFrom(string file) {
     else {
         printf("No such file\n");  
     }
-    vector<Shape*> *_list = new vector<Shape*>[count];
+    vector<Shape*> *_list = new vector<Shape*>;
     for(int i=0; i<count; i++) {
         //printf("%s\n",list.at(i)->getInfo().c_str());
         _list[0].push_back(list.at(i));

@@ -147,6 +147,6 @@ string Cone::getInfo() const{
     sprintf(volume,"%.2lf",this->getVolume());
     sprintf(area,"%.2lf",this->getArea());
 
-    text = "Cone: " + this->getName() + ", Radius=" + radius + ", Height=" + height + "\nSurface area: " + area + ", Volume: " + volume;
+    text = "Cone: " + this->getName() + ", Radius=" + radius + ", Height=" + height + "\n\tSurface area: " + area + ", Volume: " + volume;
     return text;
 }

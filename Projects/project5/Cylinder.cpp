@@ -146,6 +146,6 @@ string Cylinder::getInfo() const {
     sprintf(volume,"%.2lf",this->getVolume());
     sprintf(area,"%.2lf",this->getArea());
 
-    text = "Cylinder: " + this->getName() + ", Radius=" + radius + ", Height=" + height + "\nSurface area: " + area + ", Volume: " + volume;
+    text = "Cylinder: " + this->getName() + ", Radius=" + radius + ", Height=" + height + "\n\tSurface area: " + area + ", Volume: " + volume;
     return text;
 }

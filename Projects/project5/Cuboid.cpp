@@ -149,6 +149,6 @@ string Cuboid::getInfo() const {
     sprintf(volume,"%.2lf",this->getVolume());
     sprintf(area,"%.2lf",this->getArea());
 
-    text = "Cuboid: " + this->getName() + ", Length=" + length +", Width=" + width + ", Height=" + height + "\nSurface area: " + area + ", Volume: " + volume;
+    text = "Cuboid: " + this->getName() + ", Length=" + length +", Width=" + width + ", Height=" + height + "\n\tSurface area: " + area + ", Volume: " + volume;
     return text;
 }

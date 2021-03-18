@@ -141,7 +141,7 @@ string Sphere::getInfo() const{
     sprintf(area,"%.2lf",this->getArea());
     sprintf(volume,"%.2lf",this->getVolume());
     sprintf(radius,"%.2lf",this->radius);
-    text = "Sphere: " + this->getName() + ", Radius=" + radius + "\n" + "Surface area: " + area + ", Volume: " + volume;
+    text = "Sphere: " + this->getName() + ", Radius=" + radius + "\n" + "\tSurface area: " + area + ", Volume: " + volume;
 
     return text;
 }

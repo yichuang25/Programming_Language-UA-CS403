@@ -23,7 +23,7 @@ bool Cylinder::test(const vector<string>& cond) const {
         //printf("2\n");
         return true;
     }
-    for(int i=0; i<cond.size(); i=i+3) {
+    for(int i=0; (unsigned)i<cond.size(); i=i+3) {
         string name = cond.at(i);
         string op = cond.at(i+1);
         string value = cond.at(i+2);

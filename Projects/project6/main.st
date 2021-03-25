@@ -99,12 +99,21 @@ whileTrue: [
     ].
     i := i + 1.
 ].
-slist printNl.
-|command actset|
+"slist printNl."
+|command actset names ops| 
 actset := Set new.
 actset add: 'print'. actset add: 'count'. actset add: 'min'. actset add: 'max'. actset add: 'total'. actset add: 'avg'.
-actset printNl.
-'Enter a command: ' displayNl.
+"actset printNl."
+
+names := Set new.
+names add: 'type'. names add: 'area'. names add: 'volume'.
+"names printNl."
+
+ops := Set new.
+ops add: '=='. ops add: '!='. ops add: '>='. ops add: '<='. ops add: '>'. ops add: '<'.
+"ops printNl."
+
+'Enter a command: ' display.
 command := stdin nextLine.
 [command = 'quit']
 whileFalse: [
@@ -158,40 +167,657 @@ whileFalse: [
         'Action:' display. command display. ' is not valid.' displayNl.
     ]
     ifTrue: [
-        'Is action' displayNl.
+        "'Is action' displayNl."
         (act = 'count')
         ifTrue: [
-            |t1 result|
+            |t1 conditions total|
+            (cond > 0)
+            ifTrue: [
+                total := cond * 3.
+                "total printNl."
+                conditions := Array new: total.
+            ].
+            "cond printNl."
             t1 := 1.
             [t1 <= cond]
             whileTrue: [
-                |c1|
-                'Enter test condition #' display. t1 display. ': ' displayNl.
+                |c1 c2 cname op val flag|
+                flag := 0.
+                'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
-                c1 printNl.
+                "c1 printNl."
 
-                t1 := t1 + 1.
+                c1 := c1 substrings.
+                
+                (c1 size = 3)
+                ifTrue: [
+                    cname := c1 at: 1.
+                    op := c1 at: 2.
+                    val := c1 at: 3.
+                    "cname printNl. op printNl. val printNl."
+                ]
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+                
+                
+                ((names includes: cname) & (ops includes: op) & (flag = 0))
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    |c2|
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+
+
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: val.
+
+                    t1 := t1 + 1.
+                ].
+            ].
+            (cond = 0)
+            ifTrue: [
+                'There are ' display.
+                slist size print.
+                ' shapes.' displayNl
             ]
+            ifFalse: [
+                |result i shape totals|
+                totals := 0.
+
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    "shape printNl."
+                    (shape test: conditions)
+                    ifTrue: [
+                        totals := totals + 1.
+                        shape printNl.
+                    ].
+                    i := i + 1.
+                ].
+                
+                'There are ' display.
+                totals print.
+                ' shapes.' displayNl
+
+            ].
         ].
         (act = 'print')
         ifTrue: [
+            |t1 conditions total|
+            (cond > 0)
+            ifTrue: [
+                total := cond * 3.
+                "total printNl."
+                conditions := Array new: total.
+            ].
+            "cond printNl."
+            t1 := 1.
+            [t1 <= cond]
+            whileTrue: [
+                |c1 c2 cname op val flag|
+                flag := 0.
+                'Enter test condition #' display. t1 display. ': ' display.
+                c1 := stdin nextLine.
+                "c1 printNl."
 
+                c1 := c1 substrings.
+                
+                (c1 size = 3)
+                ifTrue: [
+                    cname := c1 at: 1.
+                    op := c1 at: 2.
+                    val := c1 at: 3.
+                    "cname printNl. op printNl. val printNl."
+                ]
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+                
+                
+                ((names includes: cname) & (ops includes: op) & (flag = 0))
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    |c2|
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+
+
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: val.
+
+                    t1 := t1 + 1.
+                ].
+            ].
+            (cond = 0)
+            ifTrue: [
+                |i|
+                i := 1.
+                
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    shape getInfo.
+
+                    i := i + 1.
+                ].
+            ]
+            ifFalse: [
+                |result i shape totals|
+                totals := 0.
+
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    "shape printNl."
+                    (shape test: conditions)
+                    ifTrue: [
+                        shape getInfo.
+                    ].
+                    i := i + 1.
+                ].
+
+            ].
         ].
         (act = 'min')
         ifTrue: [
+            |t1 conditions total|
+            (cond > 0)
+            ifTrue: [
+                total := cond * 3.
+                "total printNl."
+                conditions := Array new: total.
+            ].
+            "cond printNl."
+            t1 := 1.
+            [t1 <= cond]
+            whileTrue: [
+                |c1 c2 cname op val flag|
+                flag := 0.
+                'Enter test condition #' display. t1 display. ': ' display.
+                c1 := stdin nextLine.
+                "c1 printNl."
+
+                c1 := c1 substrings.
+                
+                (c1 size = 3)
+                ifTrue: [
+                    cname := c1 at: 1.
+                    op := c1 at: 2.
+                    val := c1 at: 3.
+                    "cname printNl. op printNl. val printNl."
+                ]
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+                
+                
+                ((names includes: cname) & (ops includes: op) & (flag = 0))
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    |c2|
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+
+
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: val.
+
+                    t1 := t1 + 1.
+                ].
+            ].
+
+            (cond = 0)
+            ifTrue: [
+                |area minArea vol minVol i shape|
+                i := 1.
+                [i <= slist size]
+                whileTrue:[
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+                    (i = 1)
+                    ifTrue: [
+                        minArea := area.
+                        minVol := vol.
+                    ]
+                    ifFalse: [
+                        (area < minArea)
+                        ifTrue: [
+                            minArea := area.
+                        ].
+    
+                        (vol < minVol)
+                        ifTrue: [
+                            minVol := vol.
+                        ].
+                        
+                    ].
+                    i := i + 1.
+                ].
+                'min(Surface area)= ' display.
+                minArea printNl.
+
+                'min(Volume)= ' display.
+                minVol printNl.
+            ]
+            ifFalse: [
+                |area minArea vol minVol i shape flag|
+                minArea := -1.
+                minVol := -1.
+                flag := 0.
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+
+                    (shape test: conditions)
+                    ifTrue: [
+                        (flag = 0)
+                        ifTrue: [
+                            minArea := area.
+                            minVol := vol.
+                            flag := flag + 1.
+                        ]
+                        ifFalse: [
+                            (area < minArea)
+                            ifTrue: [
+                                minArea := area.
+                            ].
+                            (vol < minVol)
+                            ifTrue: [
+                                minVol := vol.
+                            ].
+                        ].
+                    ].
+
+                    i := i + 1.
+                ].
+                (flag = 0)
+                ifTrue: [
+                    'There are no shapes satisfying the condition(s)' displayNl.
+                ]
+                ifFalse: [
+                    'min(Surface area)= ' display.
+                    minArea printNl.
+
+                    'min(Volume)= ' display.
+                    minVol printNl.
+                ].
+            ].
 
         ].
         (act = 'max')
         ifTrue: [
+            |t1 conditions total|
+            (cond > 0)
+            ifTrue: [
+                total := cond * 3.
+                "total printNl."
+                conditions := Array new: total.
+            ].
+            "cond printNl."
+            t1 := 1.
+            [t1 <= cond]
+            whileTrue: [
+                |c1 c2 cname op val flag|
+                flag := 0.
+                'Enter test condition #' display. t1 display. ': ' display.
+                c1 := stdin nextLine.
+                "c1 printNl."
 
+                c1 := c1 substrings.
+                
+                (c1 size = 3)
+                ifTrue: [
+                    cname := c1 at: 1.
+                    op := c1 at: 2.
+                    val := c1 at: 3.
+                    "cname printNl. op printNl. val printNl."
+                ]
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+                
+                
+                ((names includes: cname) & (ops includes: op) & (flag = 0))
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    |c2|
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+
+
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: val.
+
+                    t1 := t1 + 1.
+                ].
+            ].
+
+            (cond = 0)
+            ifTrue: [
+                |area maxArea vol maxVol i shape|
+                i := 1.
+                [i <= slist size]
+                whileTrue:[
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+                    (i = 1)
+                    ifTrue: [
+                        maxArea := area.
+                        maxVol := vol.
+                    ]
+                    ifFalse: [
+                        (area > maxArea)
+                        ifTrue: [
+                            maxArea := area.
+                        ].
+    
+                        (vol > maxVol)
+                        ifTrue: [
+                            maxVol := vol.
+                        ].
+                        
+                    ].
+                    i := i + 1.
+                ].
+                'max(Surface area)= ' display.
+                maxArea printNl.
+
+                'max(Volume)= ' display.
+                maxVol printNl.
+            ]
+            ifFalse: [
+                |area maxArea vol maxVol i shape flag|
+                maxArea := -1.
+                maxVol := -1.
+                flag := 0.
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+
+                    (shape test: conditions)
+                    ifTrue: [
+                        (flag = 0)
+                        ifTrue: [
+                            maxArea := area.
+                            maxVol := vol.
+                            flag := flag + 1.
+                        ]
+                        ifFalse: [
+                            (area > maxArea)
+                            ifTrue: [
+                                maxArea := area.
+                            ].
+                            (vol > maxVol)
+                            ifTrue: [
+                                maxVol := vol.
+                            ].
+                        ].
+                    ].
+
+                    i := i + 1.
+                ].
+                (flag = 0)
+                ifTrue: [
+                    'There are no shapes satisfying the condition(s)' displayNl.
+                ]
+                ifFalse: [
+                    'max(Surface area)= ' display.
+                    maxArea printNl.
+
+                    'max(Volume)= ' display.
+                    maxVol printNl.
+                ].
+            ].
         ].
-        (act = 'total' | act = 'avg')
+        ((act = 'total') | (act = 'avg'))
         ifTrue: [
+            |t1 conditions total|
+            (cond > 0)
+            ifTrue: [
+                total := cond * 3.
+                "total printNl."
+                conditions := Array new: total.
+            ].
+            "cond printNl."
+            t1 := 1.
+            [t1 <= cond]
+            whileTrue: [
+                |c1 c2 cname op val flag|
+                flag := 0.
+                'Enter test condition #' display. t1 display. ': ' display.
+                c1 := stdin nextLine.
+                "c1 printNl."
+
+                c1 := c1 substrings.
+                
+                (c1 size = 3)
+                ifTrue: [
+                    cname := c1 at: 1.
+                    op := c1 at: 2.
+                    val := c1 at: 3.
+                    "cname printNl. op printNl. val printNl."
+                ]
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+                
+                
+                ((names includes: cname) & (ops includes: op) & (flag = 0))
+                ifFalse: [
+                    'Invalid format' displayNl.
+                    flag := 1.
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    |c2|
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+
+
+                ].
+
+                (flag = 0)
+                ifTrue: [
+                    c2 := ((t1-1) * 3) + 1.
+                    conditions at: c2 put: cname.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: op.
+                    c2 := c2 + 1.
+                    conditions at: c2 put: val.
+
+                    t1 := t1 + 1.
+                ].
+            ].
+
+            (cond = 0)
+            ifTrue: [
+                |shape i sumArea sumVol area vol|
+                sumArea := 0.
+                sumVol := 0.
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+
+                    sumArea := sumArea + area.
+                    sumVol := sumVol + vol.
+
+                    i := i + 1.
+                ].
+        
+                ((slist size) < 1)
+                ifTrue: [
+                    'There are no shapes satisfying the condition(s)' displayNl.
+                ]
+                ifFalse: [
+                    (act = 'total')
+                    ifTrue: [
+                        'total(Surface area)= ' display.
+                        sumArea printNl.
+
+                        'total(Volume)= ' display.
+                        sumVol printNl.
+                    ]
+                    ifFalse: [
+                        |meanA meanV size|
+                        size := slist size.
+                        meanA := sumArea / (size asFloatE).
+                        meanV := sumArea / (size asFloatE).
+
+                        'avg(Surface area)= ' display.
+                        meanA printNl.
+
+                        'avg(Volume)= ' display.
+                        meanV printNl.
+
+                    ].
+                ].
+                
+            ]
+            ifFalse: [
+                |shape i sumArea sumVol area vol count|
+                sumArea := 0 asFloatE.
+                sumVol := 0 asFloatE.
+                count := 0.
+                i := 1.
+                [i <= slist size]
+                whileTrue: [
+                    shape := (slist at: i).
+                    area := shape getArea.
+                    vol := shape getVolume.
+
+                    (shape test: conditions)
+                    ifTrue: [   
+                        sumArea := sumArea + area.
+                        sumVol := sumVol + vol.
+                        count := count + 1.
+                        
+                    ].
+
+                    i := i + 1.
+                ].
+                (count = 0)
+                ifTrue: [
+                    'There are no shapes satisfying the condition(s)' displayNl.
+                ]
+                ifFalse: [
+                    (act = 'total')
+                    ifTrue: [
+                        'total(Surface area)= ' display.
+                        sumArea printNl.
+
+                        'total(Volume)= ' display.
+                        sumVol printNl.
+                    ]
+                    ifFalse: [
+                        |meanA meanV|
+                        meanA := sumArea / (count asFloatE).
+                        meanV := sumVol / (count asFloatE).
+
+                        'avg(Surface area)= ' display.
+                        meanA printNl.
+
+                        'avg(Volume)= ' display.
+                        meanV printNl.
+
+                    ].
+                    
+                ].
+
+            ].
 
         ].
+
     ].
 
-
-    'Enter a command: ' displayNl.
+    command := nil.
+    'Enter a command: ' display.
     command := stdin nextLine.
 ].

@@ -37,7 +37,7 @@ Shape subclass: Sphere [
         |index size|
         index := 1.
         size := cond size.
-        size printNl.
+        "size printNl."
         [index <= size]
         whileTrue: [
             | name op value|

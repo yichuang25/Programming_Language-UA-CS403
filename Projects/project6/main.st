@@ -197,15 +197,18 @@ whileFalse: [
                     "cname printNl. op printNl. val printNl."
                 ]
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
                 ].
                 
                 
                 ((names includes: cname) & (ops includes: op) & (flag = 0))
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
+                ].
+
+                (flag = 1)
+                ifTrue: [
+                    'Invalid format' displayNl.
                 ].
 
                 (flag = 0)
@@ -250,7 +253,7 @@ whileFalse: [
                     (shape test: conditions)
                     ifTrue: [
                         totals := totals + 1.
-                        shape printNl.
+                        "shape printNl."
                     ].
                     i := i + 1.
                 ].
@@ -290,15 +293,18 @@ whileFalse: [
                     "cname printNl. op printNl. val printNl."
                 ]
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
                 ].
                 
                 
                 ((names includes: cname) & (ops includes: op) & (flag = 0))
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
+                ].
+
+                (flag = 1)
+                ifTrue: [
+                    'Invalid format' displayNl.
                 ].
 
                 (flag = 0)
@@ -385,15 +391,18 @@ whileFalse: [
                     "cname printNl. op printNl. val printNl."
                 ]
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
                 ].
                 
                 
                 ((names includes: cname) & (ops includes: op) & (flag = 0))
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
+                ].
+
+                (flag = 1)
+                ifTrue: [
+                    'Invalid format' displayNl.
                 ].
 
                 (flag = 0)
@@ -532,15 +541,18 @@ whileFalse: [
                     "cname printNl. op printNl. val printNl."
                 ]
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
                 ].
                 
                 
                 ((names includes: cname) & (ops includes: op) & (flag = 0))
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
+                ].
+
+                (flag = 1)
+                ifTrue: [
+                    'Invalid format' displayNl.
                 ].
 
                 (flag = 0)
@@ -678,15 +690,18 @@ whileFalse: [
                     "cname printNl. op printNl. val printNl."
                 ]
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
                 ].
                 
                 
                 ((names includes: cname) & (ops includes: op) & (flag = 0))
                 ifFalse: [
-                    'Invalid format' displayNl.
                     flag := 1.
+                ].
+
+                (flag = 1)
+                ifTrue: [
+                    'Invalid format' displayNl.
                 ].
 
                 (flag = 0)

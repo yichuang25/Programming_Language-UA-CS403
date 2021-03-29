@@ -8,3 +8,6 @@ UnitSphere sphere 1
 LargeSphere sphere 100
 Cone#2 cone 1 2
 Cyl#2 cylinder 1 2
+Box#3 cuboid 3 3 3
+Sphere#1 sphere 4
+Cyl#3 cylinder 3 4

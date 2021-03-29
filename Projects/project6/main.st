@@ -1,6 +1,6 @@
 (Smalltalk arguments size ~= 1)
 ifTrue: [
-    'Usage: shape_file' printNl.
+    'Usage: shape.st sphere.st cylinder.st cone.st cuboid.st -f main.st shape_file' printNl.
     ^ObjectMemory quit.
 ].
 
@@ -9,7 +9,9 @@ ifTrue: [
 
 f := FileStream open: (Smalltalk arguments at: 1) mode: #read
 ifFail: [
-    'Fail to open file' printNl.
+    'Unable to open ' print.
+    (Smalltalk arguments at: 1) display.
+    ' for reading.' printNl.
     ^ObjectMemory quit.
 ].
 |b ws|

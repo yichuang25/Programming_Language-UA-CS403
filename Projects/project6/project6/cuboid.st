@@ -1,32 +1,54 @@
-Shape subclass: Sphere [
-    | radius |
-
+Shape subclass: Cuboid [
+    | length width height |
+    
     init [
-    radius := 0.
-    ^super init
+        length := 0.
+        width := 0.
+        height := 0.
+        ^super init.
     ]
 
-    setradius: rad [
-        radius := rad asFloatE.
+    setlength: l [
+        length := l asFloatE.
     ]
 
-    getradius [
-        ^radius.
+    getlength [
+        ^length.
     ]
 
-    getArea [
-        ^(radius * radius * 4.0 asFloatE * FloatE pi).
+    setwidth: w [
+        width := w asFloatE.
     ]
 
-    getVolume [
-        ^(4/3) asFloatE * FloatE pi * radius * radius * radius.
+    getwidth [
+        ^width.
+    ]
+
+    setheight: h [
+        height := h asFloatE.
+    ]
+
+    getheight [
+        ^height.
+    ]
+
+    getArea [ 
+        ^(2 asFloatE*width*length) + (2 asFloatE*height*length) + (2 asFloatE*width*height).
+    ]
+
+    getVolume [ 
+        ^length*height*width.
     ]
 
     getInfo [
-        'Sphere: ' display.
+        'Cuboid: ' display.
         name display.
-        ', Radius=' display.
-        radius printNl.
+        ', Length=' display.
+        length print.
+        ', Width=' display.
+        width print.
+        ', Height=' display.
+        height printNl.
         '        Surface area: ' display.
         self getArea print.
         ', Volume: ' display.
@@ -37,7 +59,6 @@ Shape subclass: Sphere [
         |index size|
         index := 1.
         size := cond size.
-        "size printNl."
         [index <= size]
         whileTrue: [
             | name op value|
@@ -50,7 +71,7 @@ Shape subclass: Sphere [
             (name = 'type')
             ifTrue: [
                 | type |
-                type := 'sphere'.
+                type := 'cuboid'.
                 (op = '==')
                 ifTrue: [
                     (type ~= value)
@@ -149,9 +170,7 @@ Shape subclass: Sphere [
                 ifTrue: [
                     | v vn |
                     v := self getVolume.
-                    "v printNl."
                     vn := value asNumber asFloatE.
-                    "vn printNl."
 
                     (op = '==')
                     ifTrue: [

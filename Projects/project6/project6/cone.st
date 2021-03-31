@@ -1,9 +1,10 @@
-Shape subclass: Sphere [
-    | radius |
-
+Shape subclass: Cone [
+    | radius height |
+    
     init [
-    radius := 0.
-    ^super init
+        radius := 0.
+        height := 0.
+        ^super init.
     ]
 
     setradius: rad [
@@ -14,19 +15,29 @@ Shape subclass: Sphere [
         ^radius.
     ]
 
-    getArea [
-        ^(radius * radius * 4.0 asFloatE * FloatE pi).
+    setheight: h [
+        height := h asFloatE.
     ]
 
-    getVolume [
-        ^(4/3) asFloatE * FloatE pi * radius * radius * radius.
+    getheight [
+        ^height.
+    ]
+
+    getArea [ 
+        ^FloatE pi*radius*(radius + ((radius*radius + (height*height)) sqrt)).
+    ]
+
+    getVolume [ 
+        ^(1/3) asFloatE*FloatE pi*radius*radius*height.
     ]
 
     getInfo [
-        'Sphere: ' display.
+        'Cone: ' display.
         name display.
         ', Radius=' display.
-        radius printNl.
+        radius print.
+        ', Height=' display.
+        height printNl.
         '        Surface area: ' display.
         self getArea print.
         ', Volume: ' display.
@@ -37,7 +48,6 @@ Shape subclass: Sphere [
         |index size|
         index := 1.
         size := cond size.
-        "size printNl."
         [index <= size]
         whileTrue: [
             | name op value|
@@ -50,7 +60,7 @@ Shape subclass: Sphere [
             (name = 'type')
             ifTrue: [
                 | type |
-                type := 'sphere'.
+                type := 'cone'.
                 (op = '==')
                 ifTrue: [
                     (type ~= value)
@@ -149,9 +159,7 @@ Shape subclass: Sphere [
                 ifTrue: [
                     | v vn |
                     v := self getVolume.
-                    "v printNl."
                     vn := value asNumber asFloatE.
-                    "vn printNl."
 
                     (op = '==')
                     ifTrue: [

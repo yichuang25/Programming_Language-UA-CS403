@@ -1,0 +1,12 @@
+Box#1 cuboid 6 4 2
+Cyl#1 cylinder 10 50
+Box#2 cuboid 2 2 12
+Cone#1 cone 1 1
+Cyl#2 cylinder 1 1
+Box#3 cuboid 2 4 6
+Box#2 cuboid 10 10 10
+UnitSphere sphere 1
+LargeSphere sphere 100
+Cone#2 cone 1 2
+Cyl#3 cylinder 1 2
+Box#5 cuboid 2 2 2

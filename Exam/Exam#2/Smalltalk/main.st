@@ -22,7 +22,6 @@ b := f nextLine.
 ].
 ws nextPut: b.
 f close.
-"ws contents displayNl."
 
 |plist i tset|
 tset := Set new.
@@ -40,46 +39,53 @@ whileTrue: [
     ].
     t := (ws contents at: i) asString.
     t := t subStrings.
-    type := t at: 1.
-    fname := t at: 2.
-    lname := t at: 3.
-    (tset includes: type)
-    ifFalse: [
-        type display.
-        ' not exit' displayNl.
-    ]
+    ((t size < 3) | (t size > 6))
     ifTrue: [
-        (type = 'teaching')
+        (ws contents at: i) print.
+        ' is wrong format' displayNl.
+    ]
+    ifFalse: [
+        type := t at: 1.
+        fname := t at: 2.
+        lname := t at: 3.
+        (tset includes: type)
+        ifFalse: [
+            type display.
+            ' not exit' displayNl.
+        ]
         ifTrue: [
-            |tc b w r|
-            b := t at: 4.
-            w := t at: 5.
-            r := t at: 6.
+            (type = 'teaching')
+            ifTrue: [
+                |tc b w r|
+                b := t at: 4.
+                w := t at: 5.
+                r := t at: 6.
 
-            tc := Teaching new.
-            tc set_first_name: fname.
-            tc set_last_name: lname.
-            tc setBase: b asNumber.
-            tc setwRVU: w asNumber.
-            tc setRate: r asNumber.
+                tc := Teaching new.
+                tc set_first_name: fname.
+                tc set_last_name: lname.
+                tc setBase: b asNumber.
+                tc setwRVU: w asNumber.
+                tc setRate: r asNumber.
 
-            plist at: i put: tc.
+                plist at: i put: tc.
+            ].
+            (type = 'clinical')
+            ifTrue: [
+                |cn w r|
+                w := t at: 4.
+                r := t at: 5.
+
+                cn := Clinical new.
+                cn set_first_name: fname.
+                cn set_last_name: lname.
+                cn setwRVU: w asNumber.
+                cn setRate: r asNumber.
+
+                plist at: i put: cn.
+            ].
+
         ].
-        (type = 'clinical')
-        ifTrue: [
-            |cn w r|
-            w := t at: 4.
-            r := t at: 5.
-
-            cn := Clinical new.
-            cn set_first_name: fname.
-            cn set_last_name: lname.
-            cn setwRVU: w asNumber.
-            cn setRate: r asNumber.
-
-            plist at: i put: cn.
-        ].
-
     ].
 
     i := i+1.
@@ -90,7 +96,11 @@ i := 1.
 [i <= plist size]
 whileTrue: [
     phy := (plist at: i).
-    phy getInfo.
+    (phy ~= nil)
+    ifTrue:[
+        phy getInfo.
+    ].
+    
 
     i := i + 1.
 ].

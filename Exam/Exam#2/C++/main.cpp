@@ -20,6 +20,7 @@ vector<Physician*> *readFrom(string file) {
     if(datafile) {
         string line;
         while(getline(datafile,line)) {
+            
             string work;
             string firstname;
             string lastname;
@@ -86,6 +87,7 @@ int main(int argc, char *argv[]) {
     vector<Physician*> *physicians = readFrom(argv[1]);
     if(physicians->size() == 0) {
         cout << "There are no shape in the file." << endl;
+        return 2;
     }
 
     //cout << physicians->size() << endl;

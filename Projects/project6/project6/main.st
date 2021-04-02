@@ -121,11 +121,20 @@ ops := Set new.
 ops add: '=='. ops add: '!='. ops add: '>='. ops add: '<='. ops add: '>'. ops add: '<'.
 "ops printNl."
 
+"command := ''.
 'Enter a command: ' display.
-command := stdin nextLine.
-[command = 'quit']
-whileFalse: [
+command := stdin nextLine."
+command := ''.
+[command ~= 'quit']
+whileTrue: [
     |num stp act cond|
+    'Enter a command: ' display.
+    command := stdin nextLine.
+    "command displayNl."
+    (command = 'quit')
+    ifTrue: [
+        ^ObjectMemory quit.
+    ].
     num := 1.
     stp := 0.
     [num <= command size]
@@ -191,10 +200,11 @@ whileFalse: [
             whileTrue: [
                 |c1 c2 cname op val flag|
                 flag := 0.
+                c1 := ''.
                 'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
                 "c1 printNl."
-
+                
                 c1 := c1 substrings.
                 
                 (c1 size = 3)
@@ -287,9 +297,10 @@ whileFalse: [
             whileTrue: [
                 |c1 c2 cname op val flag|
                 flag := 0.
+                c1 := ''.
                 'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
-                "c1 printNl."
+                c1 printNl.
 
                 c1 := c1 substrings.
                 
@@ -385,6 +396,7 @@ whileFalse: [
             whileTrue: [
                 |c1 c2 cname op val flag|
                 flag := 0.
+                c1 := ''.
                 'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
                 "c1 printNl."
@@ -535,6 +547,7 @@ whileFalse: [
             whileTrue: [
                 |c1 c2 cname op val flag|
                 flag := 0.
+                c1 := ''.
                 'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
                 "c1 printNl."
@@ -684,6 +697,7 @@ whileFalse: [
             whileTrue: [
                 |c1 c2 cname op val flag|
                 flag := 0.
+                c1 := ''.
                 'Enter test condition #' display. t1 display. ': ' display.
                 c1 := stdin nextLine.
                 "c1 printNl."
@@ -840,7 +854,7 @@ whileFalse: [
 
     ].
 
-    command := nil.
+    "command := ''.
     'Enter a command: ' display.
-    command := stdin nextLine.
+    command := stdin nextLine."
 ].

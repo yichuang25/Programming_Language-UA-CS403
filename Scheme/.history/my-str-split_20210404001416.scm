@@ -13,8 +13,9 @@
             )
         )
         (else
-            (str-split-helper (string-tail line 1) (string-append str (string-head line 1)) list)
-        )
+            (str-split-helper (string-tail line 1)
+                              (string-append str (string-head line 1))
+                              list))
     )
 )
 

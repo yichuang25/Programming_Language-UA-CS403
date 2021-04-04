@@ -3,9 +3,7 @@
   (let ((port (open-input-file name)))
     (print-file-helper port)
     (close-input-port port)
-    'done
-  )
-)
+    'done))
 
 (define (print-file-helper port)
   (let ((stuff (read port)))

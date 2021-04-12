@@ -1,5 +1,5 @@
 (define (perform  . args)
-    ;(display args)
+    ;(display (NOT (valid_arg? (length args))))
     ;(newline)
     ;Test args number
     (cond ((NOT (valid_arg? (length args))) (display "Incorrect number of arguments\n"))
@@ -711,7 +711,7 @@
 
 
 (define (valid_arg? length)
-    (EQV? (modulo (- length 2) 3) 0)
+    (OR (EQV? (modulo (- length 2) 3) 0) (= length 2))
 )
 
 (define (actions)

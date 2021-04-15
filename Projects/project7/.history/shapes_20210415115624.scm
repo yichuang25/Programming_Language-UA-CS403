@@ -173,7 +173,6 @@
 )
 
 
-
 (define (test? shape condlist)
     (define (loop ls1 lst)
         (if (null? lst)

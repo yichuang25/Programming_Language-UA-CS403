@@ -172,7 +172,7 @@
     )
 )
 
-;TODO finish test?
+
 
 (define (test? shape condlist)
     (define (loop ls1 lst)
@@ -329,7 +329,7 @@
     (loop '() condlist)
 )
 
-;TODO: finish filter
+
 (define (filterlist list condlist)
     (let loop((ls1 '()) (lst list))
         (if (null? lst)
@@ -362,7 +362,7 @@
 )
 
 (define (average list)
-    (/ (sum list) (length list))
+    (exact->inexact (/ (sum list) (length list)))
 )
 
 (define (sum elemList)
